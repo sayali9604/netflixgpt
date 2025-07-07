@@ -1,7 +1,60 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidData } from "../utils/validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from "../utils/firebase"
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
+    const [errorMessage, setErrorMessage] = useState(null);
+
+    const email = useRef(null);
+    const password = useRef(null);
+
+    function handleButtonClick() {
+       const message = checkValidData(email.current.value, password.current.value);
+        setErrorMessage(message);
+        if(message) return;
+      
+  
+        if(!isSignInForm){
+          //Sign Up logic
+          createUserWithEmailAndPassword
+      (auth, 
+      email.current.value,
+      password.current.value
+    )
+      .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+    console.log(user);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode +"-" + errorMessage)
+    // ..
+  });  
+          
+  }
+  else{
+  //sign in logic
+signInWithEmailAndPassword(auth,email.current.value, password.current.value)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode + "-" + errorMessage);
+  });
+        }
+    };
+
+
     const toggleSignInForm = () =>{
         setIsSignInForm(!isSignInForm);
 
@@ -23,7 +76,8 @@ const Login = () => {
 
       {/* Centered Form */}
       <div className="flex justify-center items-center h-screen">
-        <form className="bg-black bg-opacity-80 p-6 sm:p-8 md:p-10 lg:p-12 rounded-md w-full max-w-sm text-white">
+        <form onSubmit={(e) => e.preventDefault()}
+        className="bg-black bg-opacity-80 p-6 sm:p-8 md:p-10 lg:p-12 rounded-md w-full max-w-sm text-white">
           <h1 className="text-2xl font-bold mb-6 text-center">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
           {!isSignInForm && (<input
             type="text"
@@ -32,16 +86,19 @@ const Login = () => {
           />)}
 
           <input
+          ref={email}
             type="email"
             placeholder="Email address"
             className="w-full mb-4 p-3 rounded bg-gray-700 text-white placeholder-gray-400"
           />          
           <input
+          ref={password}
             type="password"
             placeholder="Password"
             className="w-full mb-4 p-3 rounded bg-gray-700 text-white placeholder-gray-400"
           />
-          <button className="w-full bg-red-600 hover:bg-red-700 font-semibold py-3 rounded mt-2">
+          <p className="text-red-500 font-bold text-lg py-2">{errorMessage}</p>
+          <button className="w-full bg-red-600 hover:bg-red-700 font-semibold py-3 rounded mt-2" onClick={handleButtonClick}>
             {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
           <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
