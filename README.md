@@ -13,8 +13,9 @@ In create react app you have to use tailwind css v3 cause v4 is not wiking in th
  -Create signup user Account
  -Implement Sign In user API
  -Created Redux Store with userSlice
- -
- -
+ -Implemented Sign out
+ -Update Profile
+ 
 
  # feature
  - Login/Sign Up 

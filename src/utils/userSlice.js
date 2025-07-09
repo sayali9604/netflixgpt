@@ -1,17 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+//import { removeUser } from "../utils/userSlice"; // Adjust path as needed
 
 const userSlice = createSlice({
     name: 'user',
     initialState: null,
-    reducer: {
+    reducers: {
         addUser: (state, action) =>{
             return action.payload;
         },
-        removeUser: (state, action) =>{
+        removeUser: () =>{
             return null;
         },
     },
 });
 
-export const {addUser, removeUser} = userSlice.actions;
+export const { addUser, removeUser } = userSlice.actions;
 export default userSlice.reducer;
