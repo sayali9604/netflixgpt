@@ -15,7 +15,21 @@ In create react app you have to use tailwind css v3 cause v4 is not wiking in th
  -Created Redux Store with userSlice
  -Implemented Sign out
  -Update Profile
- 
+ -BugFix:signup user displayname and profile picture.
+ -Bugfix:if the user is not logged in redirect/browse to login page and vice-versa
+ -Unsubscibed to the onAuthStateChange callback.
+ - Add hardcoded values to constants
+ - Register TMDB API & create an app & get an access token.
+ - Get data from TMDB now Playing movies list API
+ - custom hooks for now playing movies.
+ - Created movieSlice
+ - Update Store with movies Data
+ - planning for main and secondary container
+ - Fetch Data for Trailer Video 
+ - Update Store with Trailer Video Data
+ - Embedded the YouTube Video and Make it autoplay.
+ - Added tailwind classes to make main container look good.
+ - 
 
  # feature
  - Login/Sign Up 
@@ -36,3 +50,20 @@ In create react app you have to use tailwind css v3 cause v4 is not wiking in th
 
  # Authentication 
  for this we need firebase backend
+ # Navigation 
+ navigate works only in children of app .
+ # TMDB API 
+ -go to tmdb website 
+ -login there 
+ -go to api key section find API key there
+ -register the app there online
+
+ # why everything happens two times we see in console.
+ -this is because strict mode ..if we remove this from our code it will show us once.
+ it will happen in our local when we were developing the app.
+ this strict mode checks the if there is any inconsistency happen there.
+ # Modular coding 
+ Breaking the code into small modules.
+ # useSelector 
+ it is used to fetch data..in our web app.
+
