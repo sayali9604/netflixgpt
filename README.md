@@ -29,7 +29,12 @@ In create react app you have to use tailwind css v3 cause v4 is not wiking in th
  - Update Store with Trailer Video Data
  - Embedded the YouTube Video and Make it autoplay.
  - Added tailwind classes to make main container look good.
- - 
+ - Build Secondary Component
+ - Build Movie List
+ - Build Movie Card
+ - TMDB image CDN URL
+ - Made the Browser page Amazing with Tailwind CSS
+ - usePopularMovies Custom Hooks
 
  # feature
  - Login/Sign Up 
